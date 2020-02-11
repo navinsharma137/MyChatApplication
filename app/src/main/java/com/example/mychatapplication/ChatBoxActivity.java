@@ -46,7 +46,7 @@ public class ChatBoxActivity extends AppCompatActivity {
 
 
         try {
-            socket = IO.socket("http://192.168.43.62:3000");
+            socket = IO.socket("http://192.168.137.1:3000");
             socket.connect();
             socket.emit("join", nickname);
 
@@ -102,6 +102,8 @@ public class ChatBoxActivity extends AppCompatActivity {
                             String message = data.getString("message");
                             m = new Message(nickname, message);
                             messageList.add(m);
+                            Log.d("Chatting app", "run: "+m.getMessage());
+
 
                             chatBoxAdapter = new ChatBoxAdapter(messageList);
 
