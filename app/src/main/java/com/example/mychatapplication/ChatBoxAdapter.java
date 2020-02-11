@@ -1,5 +1,6 @@
 package com.example.mychatapplication;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public class ChatBoxAdapter extends RecyclerView.Adapter<ChatBoxAdapter.MyViewHolder> {
     private List<Message> MessageList;
+
+    public class MyViewHolder extends RecyclerView.ViewHolder {
+        TextView name;
+        TextView message;
+        MyViewHolder(View view){
+            super(view);
+            name = view.findViewById(R.id.nickname);
+            message = view.findViewById(R.id.message);
+
+        }
+    }
 
     public ChatBoxAdapter(List<Message> MessageList){
         this.MessageList = MessageList;
@@ -34,19 +46,9 @@ public class ChatBoxAdapter extends RecyclerView.Adapter<ChatBoxAdapter.MyViewHo
 
     @Override
     public int getItemCount() {
+        Log.d("zAdapter", "getItemCount: "+MessageList.size());
         return MessageList.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView name;
-        TextView message;
 
-        MyViewHolder(View view){
-            super(view);
-
-            name = view.findViewById(R.id.nickname);
-            message = view.findViewById(R.id.message);
-
-        }
-    }
 }

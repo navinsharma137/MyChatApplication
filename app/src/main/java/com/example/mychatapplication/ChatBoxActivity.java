@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,6 +31,7 @@ public class ChatBoxActivity extends AppCompatActivity {
     public Button send;
     private Socket socket;
     private String nickname;
+    private Message m;
 
 
     @Override
@@ -47,6 +49,7 @@ public class ChatBoxActivity extends AppCompatActivity {
             socket = IO.socket("http://192.168.43.62:3000");
             socket.connect();
             socket.emit("join", nickname);
+
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -82,6 +85,8 @@ public class ChatBoxActivity extends AppCompatActivity {
             }
         });
 
+
+
         socket.on("message", new Emitter.Listener() {
             @Override
             public void call(final Object... args) {
@@ -89,11 +94,13 @@ public class ChatBoxActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         JSONObject data = (JSONObject) args[0];
+
+
                         try {
+                            Log.d("Hello wolrd", "run: "+data);
                             String nickname = data.getString("senderNickname");
                             String message = data.getString("message");
-
-                            Message m = new Message(nickname, message);
+                            m = new Message(nickname, message);
                             messageList.add(m);
 
                             chatBoxAdapter = new ChatBoxAdapter(messageList);
@@ -115,6 +122,7 @@ public class ChatBoxActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        Log.d("Qwerty", "run: Evetn");
                         String data = (String) args[0];
                         // get the extra data from the fired event and display a toast
                         Toast.makeText(ChatBoxActivity.this, data, Toast.LENGTH_SHORT).show();
