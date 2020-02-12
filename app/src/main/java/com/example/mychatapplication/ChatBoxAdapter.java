@@ -1,5 +1,8 @@
 package com.example.mychatapplication;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +21,8 @@ public class ChatBoxAdapter extends RecyclerView.Adapter<ChatBoxAdapter.MyViewHo
     private String username;
 
 
+
+
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView name;
         LinearLayout linearLayout;
@@ -27,13 +32,14 @@ public class ChatBoxAdapter extends RecyclerView.Adapter<ChatBoxAdapter.MyViewHo
             name = view.findViewById(R.id.nickname);
             message = view.findViewById(R.id.message);
             linearLayout = view.findViewById(R.id.container_layout);
-            username = name.toString();
 
         }
     }
 
     public ChatBoxAdapter(List<Message> MessageList){
         this.MessageList = MessageList;
+
+
     }
 
     @NonNull
@@ -45,8 +51,15 @@ public class ChatBoxAdapter extends RecyclerView.Adapter<ChatBoxAdapter.MyViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ChatBoxAdapter.MyViewHolder holder, int position) {
+        SharedPreferences sharedpreferences;
+        //sharedpreferences = Context.this.getSharedPreferences(MainActivity.MyPREFERENCES, Context.MODE_PRIVATE);
+
+
         Message m = MessageList.get(position);
-        if(username == MainActivity.NICKNAME){
+        username = m.getName().toString();
+
+
+        if(username.equals()){
             ownMessage(holder);
         }
         else{
@@ -59,7 +72,6 @@ public class ChatBoxAdapter extends RecyclerView.Adapter<ChatBoxAdapter.MyViewHo
 
     @Override
     public int getItemCount() {
-        Log.d("zAdapter", "getItemCount: "+MessageList.size());
         return MessageList.size();
     }
 
@@ -72,7 +84,7 @@ public class ChatBoxAdapter extends RecyclerView.Adapter<ChatBoxAdapter.MyViewHo
     }
     public void expertMessage(MyViewHolder holder){
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) holder.linearLayout.getLayoutParams();
-        params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+        params.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
         holder.itemView.setLayoutParams(params);
 
     }

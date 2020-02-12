@@ -5,6 +5,8 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -24,6 +26,8 @@ import java.util.List;
 
 public class ChatBoxActivity extends AppCompatActivity {
 
+
+
     public RecyclerView recyclerView;
     public List<Message> messageList;
     public ChatBoxAdapter chatBoxAdapter;
@@ -32,6 +36,9 @@ public class ChatBoxActivity extends AppCompatActivity {
     private Socket socket;
     private String nickname;
     private Message m;
+    SharedPreferences sharedpreferences;
+
+
 
 
     @Override
@@ -42,7 +49,12 @@ public class ChatBoxActivity extends AppCompatActivity {
         send = findViewById(R.id.send);
         messageList = new ArrayList<>();
         recyclerView = findViewById(R.id.messagelist);
-        nickname = (String) getIntent().getExtras().getString(MainActivity.NICKNAME);
+        sharedpreferences = getSharedPreferences(MainActivity.MyPREFERENCES, Context.MODE_PRIVATE);
+
+       // nickname = (String) getIntent().getExtras().getString(MainActivity.NICKNAME);
+        nickname = sharedpreferences.getString("name",null);
+
+
 
 
         try {
@@ -142,4 +154,5 @@ public class ChatBoxActivity extends AppCompatActivity {
         super.onDestroy();
         socket.disconnect();
     }
+
 }
