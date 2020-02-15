@@ -58,9 +58,9 @@ public class ChatBoxActivity extends AppCompatActivity {
 
 
         try {
-            socket = IO.socket("http://10.0.2.2:3000");
+            socket = IO.socket("http://192.168.43.62:3000");
             socket.connect();
-            socket.emit("join", nickname);
+            socket.emit("india", nickname);
 
 
         } catch (Exception e) {

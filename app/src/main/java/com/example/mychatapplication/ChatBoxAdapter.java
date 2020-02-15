@@ -59,7 +59,7 @@ public class ChatBoxAdapter extends RecyclerView.Adapter<ChatBoxAdapter.MyViewHo
         username = m.getName().toString();
 
 
-        if(username.equals()){
+        if(username.equals(MainActivity.NICKNAME)){
             ownMessage(holder);
         }
         else{
