@@ -1,8 +1,6 @@
 package com.example.mychatapplication;
 
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +21,7 @@ public class ChatBoxAdapter extends RecyclerView.Adapter<ChatBoxAdapter.MyViewHo
 
 
 
+
     public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView name;
         LinearLayout linearLayout;
@@ -32,13 +31,11 @@ public class ChatBoxAdapter extends RecyclerView.Adapter<ChatBoxAdapter.MyViewHo
             name = view.findViewById(R.id.nickname);
             message = view.findViewById(R.id.message);
             linearLayout = view.findViewById(R.id.container_layout);
-
         }
     }
 
     public ChatBoxAdapter(List<Message> MessageList){
         this.MessageList = MessageList;
-
 
     }
 
@@ -51,21 +48,23 @@ public class ChatBoxAdapter extends RecyclerView.Adapter<ChatBoxAdapter.MyViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ChatBoxAdapter.MyViewHolder holder, int position) {
-        SharedPreferences sharedpreferences;
-        //sharedpreferences = Context.this.getSharedPreferences(MainActivity.MyPREFERENCES, Context.MODE_PRIVATE);
+
+
 
 
         Message m = MessageList.get(position);
         username = m.getName().toString();
+        Log.d("onBindViewHolder", "onBindViewHolder: "+MainActivity.NICKNAME);
 
 
-        if(username.equals()){
+
+        if(username.equals(MainActivity.NICKNAME)){
             ownMessage(holder);
         }
         else{
             expertMessage(holder);
         }
-        holder.name.setText(m.getName());
+        holder.name.setText(m.getName()+" : ");
         holder.message.setText(m.getMessage());
 
     }
