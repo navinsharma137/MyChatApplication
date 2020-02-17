@@ -12,7 +12,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ChatBoxActivity"></activity>
+        <activity android:name=".QuerySelectionActivity"></activity>
+        <activity android:name=".QuerySelectionActivirt" />
+        <activity android:name=".SelectOptionQueryActivity" />
+        <activity
+            android:name=".HistoryActivity"
+            android:label="@string/title_activity_history"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ChatBoxActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
